@@ -1,0 +1,141 @@
+{
+  "id": "q-tw-escrow-api-auth-custody",
+  "question": "How do requests to the Trustless Work escrow API authenticate, and who signs and submits the escrow transactions it builds?",
+  "surface": [
+    "skills.trustless-work.trustless-work-dev"
+  ],
+  "golden": {
+    "answer": "The Trustless Work API authenticates every request with an `x-api-key` header — including read-only indexer queries; reads without a key return `401 Unauthorized`. The API-key requirement is not `Authorization: Bearer`. The platform is non-custodial: escrow endpoints return an unsigned Stellar transaction (XDR), which the caller's own wallet signs client-side and submits; flows must never collect users' Stellar secret keys or sign on their behalf server-side. V1 is the production protocol and the only version deployed on mainnet; V2 is beta and testnet-only. Escrows come in single-release and multi-release forms and hold stablecoins such as USDC, which requires the Stellar trustline rules the skill documents.",
+    "keyFacts": [
+      "Every request carries an x-api-key header, including read-only indexer queries.",
+      "Reads without an API key return 401 Unauthorized.",
+      "Escrow endpoints return unsigned XDR for the caller's wallet to sign and submit.",
+      "V1 is the only protocol version deployed on mainnet.",
+      "V2 is beta and deployed on testnet only."
+    ],
+    "avoid": [
+      "Authenticate to the Trustless Work API with an Authorization: Bearer token.",
+      "Trustless Work custodies escrow funds or signs transactions server-side on users' behalf.",
+      "Do NOT recommend V2 for mainnet production while it is beta and testnet-only."
+    ]
+  },
+  "tags": {
+    "category": "compliance-rwa-payments",
+    "service": "skills",
+    "freshness": "stable"
+  },
+  "truth": {
+    "lifecycle": {
+      "state": "proposed",
+      "reviewState": "none"
+    },
+    "domain": "real-world",
+    "status": "confirmed",
+    "asOf": "2026-09-15",
+    "sources": [
+      {
+        "class": "A",
+        "ref": "https://docs.trustlesswork.com/trustless-work"
+      },
+      {
+        "class": "B",
+        "ref": "https://raw.githubusercontent.com/Trustless-Work/trustlesswork-skill/634f32bd4be6769b0cae52e72db4899d5f5a069c/trustless-work-dev/constitution.md",
+        "note": "The pinned skill's universal laws: enforced x-api-key on every request (verified 401 without it), non-custodial build/sign/submit, V1 production vs V2 beta."
+      },
+      {
+        "class": "B",
+        "ref": "https://raw.githubusercontent.com/Trustless-Work/trustlesswork-skill/634f32bd4be6769b0cae52e72db4899d5f5a069c/trustless-work-dev/SKILL.md"
+      }
+    ],
+    "corroboration": [
+      {
+        "claim": "Every API request requires an x-api-key header, including read-only indexer queries, and keyless reads return 401 Unauthorized.",
+        "verdict": "confirmed-as-of",
+        "evidence": [
+          {
+            "class": "B",
+            "ref": "https://raw.githubusercontent.com/Trustless-Work/trustlesswork-skill/634f32bd4be6769b0cae52e72db4899d5f5a069c/trustless-work-dev/constitution.md",
+            "observedAt": "2026-09-15",
+            "note": "Constitution [ENFORCED] law: x-api-key on every request, verified against the deployed API — reads without a key return 401 Unauthorized."
+          },
+          {
+            "class": "A",
+            "ref": "https://docs.trustlesswork.com/trustless-work",
+            "observedAt": "2026-09-15"
+          }
+        ]
+      },
+      {
+        "claim": "Escrow endpoints return unsigned XDR that the caller's wallet signs and submits; flows never collect users' secret keys or sign server-side.",
+        "verdict": "confirmed-as-of",
+        "evidence": [
+          {
+            "class": "B",
+            "ref": "https://raw.githubusercontent.com/Trustless-Work/trustlesswork-skill/634f32bd4be6769b0cae52e72db4899d5f5a069c/trustless-work-dev/constitution.md",
+            "observedAt": "2026-09-15",
+            "note": "Constitution [SECURITY] law plus the universal build/sign/submit sequence."
+          },
+          {
+            "class": "A",
+            "ref": "https://docs.trustlesswork.com/trustless-work",
+            "observedAt": "2026-09-15"
+          }
+        ]
+      },
+      {
+        "claim": "V1 is the production protocol and the only version deployed on mainnet; V2 is beta and testnet-only.",
+        "verdict": "confirmed-as-of",
+        "evidence": [
+          {
+            "class": "B",
+            "ref": "https://raw.githubusercontent.com/Trustless-Work/trustlesswork-skill/634f32bd4be6769b0cae52e72db4899d5f5a069c/trustless-work-dev/SKILL.md",
+            "observedAt": "2026-09-15",
+            "note": "SKILL.md 'Protocol version — read this first': V1 production/mainnet default; V2 beta, testnet-only, never the recommended production path."
+          }
+        ]
+      },
+      {
+        "claim": "Authenticate to the Trustless Work API with an Authorization: Bearer token.",
+        "verdict": "contradicted",
+        "evidence": [
+          {
+            "class": "B",
+            "ref": "https://raw.githubusercontent.com/Trustless-Work/trustlesswork-skill/634f32bd4be6769b0cae52e72db4899d5f5a069c/trustless-work-dev/constitution.md",
+            "observedAt": "2026-09-15",
+            "note": "The constitution names 'never Authorization: Bearer for the API-key requirement', and SKILL.md calls it the single most common auth mistake."
+          }
+        ]
+      },
+      {
+        "claim": "Trustless Work custodies escrow funds or signs transactions server-side on users' behalf.",
+        "verdict": "contradicted",
+        "evidence": [
+          {
+            "class": "B",
+            "ref": "https://raw.githubusercontent.com/Trustless-Work/trustlesswork-skill/634f32bd4be6769b0cae52e72db4899d5f5a069c/trustless-work-dev/constitution.md",
+            "observedAt": "2026-09-15",
+            "note": "Non-custodial model is a universal law: unsigned XDR out, client-side signing, no server-side custody or signing."
+          },
+          {
+            "class": "A",
+            "ref": "https://docs.trustlesswork.com/trustless-work",
+            "observedAt": "2026-09-15"
+          }
+        ]
+      }
+    ],
+    "verified": {
+      "date": "2026-09-15",
+      "by": "trustless-work source onboarding (skill coverage floor)",
+      "evidence": [
+        "https://raw.githubusercontent.com/Trustless-Work/trustlesswork-skill/634f32bd4be6769b0cae52e72db4899d5f5a069c/trustless-work-dev/constitution.md",
+        "https://raw.githubusercontent.com/Trustless-Work/trustlesswork-skill/634f32bd4be6769b0cae52e72db4899d5f5a069c/trustless-work-dev/SKILL.md",
+        "https://docs.trustlesswork.com/trustless-work"
+      ],
+      "rootCause": [
+        "eval-authoring"
+      ]
+    },
+    "origin": "authored 2026-09 (trustless-work source onboarding)"
+  }
+}
