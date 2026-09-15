@@ -287,9 +287,10 @@ skill directory, `trustless-work-dev/`, at the repo ROOT — pinned with the new
 (skill dirs at the repo root, cherry-picked; the sibling `scripts/` dir is recorded under
 `unpinnedUpstream`). The selection is 22 files: the `SKILL.md` router, a constitution of protocol
 invariants, and companion files for the escrow REST API (production V1 and testnet-only beta V2),
-React SDK hooks, JS SDK, and the pre-built Blocks UI. This is a new exposed surface: the served
-skill count goes 20 → 21, the catalog 253 → 282 entries (19 → 20 searchable whole skills,
-174 → 202 sections). It is filed into the new `ecosystem-platforms` group in `groups.json`.
+React SDK hooks, JS SDK, and the pre-built Blocks UI. This is a new exposed surface: the
+mirrored/pinned skill count goes 20 → 21 (`lumenloop-mcp-connect` stays retired from serving), and
+the served catalog goes 253 → 282 entries (19 → 20 searchable whole skills, 174 → 202 sections).
+It is filed into the new `ecosystem-platforms` group in `groups.json`.
 
 **Why it is safe to serve.** The bodies were read in full by the contributing author (a Trustless
 Work contributor submitting the team's own published skill). They stay within the escrow-integration
