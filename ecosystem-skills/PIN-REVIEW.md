@@ -272,3 +272,34 @@ The acceptance review is `.agents/rounds/2026-09-09-skill-pin-acceptance-grok.md
 The source audit is `.agents/rounds/2026-09-09-upstream-handoffs-grok.md`.
 The rejected candidate remains documented in `.agents/rounds/2026-09-09-drift-141-astra.md`.
 This entry approves the isolated pin for merge, not production deployment or finding retirement.
+
+### 2026-09-15 — trustless-work source added
+
+| Source | Pinned commit | Selection | Reviewed |
+| --- | --- | --- | --- |
+| `trustless-work` | `634f32bd4be6769b0cae52e72db4899d5f5a069c` | `sel:7c6d71f8eef2` | read in full |
+
+The four existing sources did not move; their selections are unchanged.
+
+**What the selection serves.** A new source: [Trustless-Work/trustlesswork-skill](https://github.com/Trustless-Work/trustlesswork-skill),
+the Trustless Work escrow-integration skill (Escrow-as-a-Service on Stellar). The repo holds one
+skill directory, `trustless-work-dev/`, at the repo ROOT — pinned with the new `path: "."` mode
+(skill dirs at the repo root, cherry-picked; the sibling `scripts/` dir is recorded under
+`unpinnedUpstream`). The selection is 22 files: the `SKILL.md` router, a constitution of protocol
+invariants, and companion files for the escrow REST API (production V1 and testnet-only beta V2),
+React SDK hooks, JS SDK, and the pre-built Blocks UI. This is a new exposed surface: the served
+skill count goes 20 → 21, the catalog 253 → 282 entries (19 → 20 searchable whole skills,
+174 → 202 sections). It is filed into the new `ecosystem-platforms` group in `groups.json`.
+
+**Why it is safe to serve.** The bodies were read in full by the contributing author (a Trustless
+Work contributor submitting the team's own published skill). They stay within the escrow-integration
+topic: no "ignore previous"-class instruction override, no literal credential (the `x-api-key`
+mentions document the API's auth-header shape, with placeholders), no reference to a retired skill
+or a non-exposed Raven operation, and no claim about this gateway's own capabilities. External
+reference material is Trustless Work's own hosted API, docs site, dApp, and MCP server — in-topic
+vendor links. The V2 material consistently labels V2 as beta and testnet-only.
+
+**Bounded risk accepted, recorded so it is not rediscovered as a surprise.** The Blocks UI files
+instruct installing and running the vendor's own published packages (`npm install
+@trustless-work/blocks`, `npx trustless-work <component>`) — a supply-chain execution prompt of the
+same class already recorded for `cctp.md` in the 2026-08-10 entry.
