@@ -1182,8 +1182,9 @@ describe("searchCatalogPage — tier marker + total/truncated", () => {
       ].sort()
     );
     // total counts searchable candidates only — 210 sections left search at
-    // the 2026-07-13 A/B, so the candidate pool shrank from 272.
-    expect(page.total).toBe(79);
+    // the 2026-07-13 A/B, so the candidate pool shrank from 272; the
+    // trustless-work skill (2026-09-15) brings this query's pool to 80.
+    expect(page.total).toBe(80);
     expect(page.truncated).toBe(true);
   });
 
