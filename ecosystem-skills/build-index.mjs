@@ -114,7 +114,8 @@ out.push("| --- | --- | --- | --- |");
 for (const src of manifest.sources) {
   let origin, pin;
   if (src.type === "github") {
-    origin = `[\`${src.owner}/${src.repo}\`](https://github.com/${src.owner}/${src.repo})${src.path ? ` \`${src.path}/\`` : " (root)"}`;
+    const where = src.path === "." ? " (skill dirs at root)" : src.path ? ` \`${src.path}/\`` : " (root)";
+    origin = `[\`${src.owner}/${src.repo}\`](https://github.com/${src.owner}/${src.repo})${where}`;
     pin = src.url ? `[\`${String(src.commit).slice(0, 12)}\`](${src.url})` : `\`${String(src.commit).slice(0, 12)}\``;
   } else {
     // lumenloop-archive: private repo, not git-commit-reproducible. Show the API
