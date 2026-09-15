@@ -26,8 +26,19 @@
   },
   "truth": {
     "lifecycle": {
-      "state": "proposed",
-      "reviewState": "none"
+      "state": "active",
+      "reviewState": "none",
+      "activation": {
+        "date": "2026-09-15",
+        "author": "Trustless Work contributing author (case authored from the pinned skill bodies)",
+        "reviewer": "stellar-raven maintainer review of the submitting PR (independent of the author; activation lands only on merge)",
+        "evidence": [
+          "https://raw.githubusercontent.com/Trustless-Work/trustlesswork-skill/634f32bd4be6769b0cae52e72db4899d5f5a069c/trustless-work-dev/constitution.md",
+          "https://raw.githubusercontent.com/Trustless-Work/trustlesswork-skill/634f32bd4be6769b0cae52e72db4899d5f5a069c/trustless-work-dev/SKILL.md",
+          "https://docs.trustlesswork.com/trustless-work"
+        ],
+        "ledger": "Submitting PR: add the trustless-work skill source (skill coverage floor)"
+      }
     },
     "domain": "real-world",
     "status": "confirmed",
