@@ -423,8 +423,10 @@ import {
   LUMENLOOP_DESCRIPTION_NOTES,
   SCOUT_DESCRIPTION_NOTES,
   SCOUT_DESCRIPTION_SCRUBS,
+  assertSkillDescriptionOverrideIdsResolve,
   scoutRefRewrites,
   rewriteScoutRefs,
+  skillDescription,
   scrubScoutDescription,
   scrubNonExposedScoutSchemaRefs
 } from "./description-notes.mjs";
@@ -861,7 +863,10 @@ function buildSkills(manifest, texts, arm) {
         ...skillEntryBase(source, syncedAt),
         id: skillId,
         kind: "skill",
-        description: attrs.description || firstParagraph(bodyLines, 0) || skill.name,
+        description: skillDescription(
+          skillId,
+          attrs.description || firstParagraph(bodyLines, 0) || skill.name
+        ),
         ...(BUILD_AUTHORITY_SKILL_ROLES[skillId]
           ? { buildAuthorityRoles: [...BUILD_AUTHORITY_SKILL_ROLES[skillId]] }
           : {}),
@@ -1177,6 +1182,10 @@ async function main() {
   }
 
   assertBuildAuthorityIdsResolve(entries);
+  assertSkillDescriptionOverrideIdsResolve(
+    entries.filter((entry) => entry.kind === "skill").map((entry) => entry.id),
+    "build-catalog"
+  );
 
   assertNoNonExposedRefs(entries);
 
